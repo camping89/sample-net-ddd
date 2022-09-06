@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDDD.Infrastructure.EntityFrameworks", "SampleDDD.Infrastructure.EntityFrameworks\SampleDDD.Infrastructure.EntityFrameworks.csproj", "{C8B23BEB-E64B-418D-8972-692647FE52B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDDD.Infrastructure.Migrations", "SampleDDD.Infrastructure.Migrations\SampleDDD.Infrastructure.Migrations.csproj", "{C1AED666-CA3C-4B92-9BF9-5343BA036861}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDDD.Domain", "SampleDDD.Domain\SampleDDD.Domain.csproj", "{472DD504-9FDC-4F2E-A439-D6F22456335E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDDD.Core", "SampleDDD.Core\SampleDDD.Core.csproj", "{C9AA57CA-5F7C-4E44-A7A1-10F70DAD9F34}"
@@ -28,10 +26,6 @@ Global
 		{C8B23BEB-E64B-418D-8972-692647FE52B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8B23BEB-E64B-418D-8972-692647FE52B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8B23BEB-E64B-418D-8972-692647FE52B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1AED666-CA3C-4B92-9BF9-5343BA036861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1AED666-CA3C-4B92-9BF9-5343BA036861}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1AED666-CA3C-4B92-9BF9-5343BA036861}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1AED666-CA3C-4B92-9BF9-5343BA036861}.Release|Any CPU.Build.0 = Release|Any CPU
 		{472DD504-9FDC-4F2E-A439-D6F22456335E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{472DD504-9FDC-4F2E-A439-D6F22456335E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{472DD504-9FDC-4F2E-A439-D6F22456335E}.Release|Any CPU.ActiveCfg = Release|Any CPU

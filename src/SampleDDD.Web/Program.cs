@@ -10,6 +10,7 @@ using SampleDDD.Application.Customers;
 using SampleDDD.Application.Products;
 using SampleDDD.Domain.Customers;
 using SampleDDD.Domain.Products;
+using SampleDDD.Infrastructure.EntityFrameworks;
 using SampleDDD.Infrastructure.EntityFrameworks.Customers;
 using SampleDDD.Infrastructure.EntityFrameworks.EntityFrameworkCore;
 using SampleDDD.Infrastructure.EntityFrameworks.Products;
@@ -36,24 +37,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(bd =>
 {
-    bd.Register(
-            c => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutoMapperProfile());
-            }))
-        .AsSelf()
-        .SingleInstance();
-    
-    bd.Register(
-            c => c.Resolve<MapperConfiguration>().CreateMapper(c.Resolve))
-        .As<IMapper>()
-        .InstancePerLifetimeScope();
-
-    bd.RegisterType<CustomerRepository>().As<ICustomerRepository>().InstancePerLifetimeScope();
-    bd.RegisterType<CustomerAppService>().As<ICustomerAppService>().InstancePerLifetimeScope();
-
-    bd.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
-    bd.RegisterType<ProductAppService>().As<IProductAppService>().InstancePerLifetimeScope();
+    bd.RegisterModule(new ApplicationModule());
+    bd.RegisterModule(new InfrastructureModule());
 });
 
 builder.Services.AddRazorPages();

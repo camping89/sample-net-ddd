@@ -1,17 +1,9 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SampleDDD.Application;
-using SampleDDD.Application.Contracts.Customers;
-using SampleDDD.Application.Contracts.Products;
-using SampleDDD.Application.Customers;
-using SampleDDD.Application.Products;
-using SampleDDD.Domain.Customers;
-using SampleDDD.Domain.Products;
-using SampleDDD.Infrastructure.EntityFrameworks.Customers;
+using SampleDDD.Infrastructure.EntityFrameworks;
 using SampleDDD.Infrastructure.EntityFrameworks.EntityFrameworkCore;
-using SampleDDD.Infrastructure.EntityFrameworks.Products;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,25 +16,8 @@ builder.Services.AddDbContext<SampleDbContext>(options =>
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(bd =>
 {
-    bd.Register(
-            c => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutoMapperProfile());
-            }))
-        .AsSelf()
-        .SingleInstance();
-    
-    bd.Register(
-            c => c.Resolve<MapperConfiguration>().CreateMapper(c.Resolve))
-        .As<IMapper>()
-        .InstancePerLifetimeScope();
-
-    bd.RegisterType<CustomerRepository>().As<ICustomerRepository>().InstancePerLifetimeScope();
-    bd.RegisterType<CustomerAppService>().As<ICustomerAppService>().InstancePerLifetimeScope();
-    
-    
-    bd.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
-    bd.RegisterType<ProductAppService>().As<IProductAppService>().InstancePerLifetimeScope();
+    bd.RegisterModule(new ApplicationModule());
+    bd.RegisterModule(new InfrastructureModule());
 });
 // Add services to the container.
 
@@ -62,7 +37,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 

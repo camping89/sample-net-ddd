@@ -9,10 +9,13 @@ public class CustomerAppService : ICustomerAppService
     private readonly ICustomerRepository _customerRepository;
     private readonly IMapper _mapper;
 
-    public CustomerAppService(ICustomerRepository customerRepository, IMapper mapper)
+    private readonly CustomerManager _customerManager;
+
+    public CustomerAppService(ICustomerRepository customerRepository, IMapper mapper, CustomerManager customerManager)
     {
         _customerRepository = customerRepository;
         _mapper = mapper;
+        _customerManager = customerManager;
     }
 
     public async Task<CustomerDto> AddAsync(CustomerCreateOrUpdateDto entityDto)
@@ -65,7 +68,7 @@ public class CustomerAppService : ICustomerAppService
 
     public async Task<List<CustomerDto>> GetListAsync(GetCustomerInput inputDto)
     {
-        var entity = await _customerRepository.GetListAsync(x=> string.IsNullOrEmpty(inputDto.Filter) || x.FirstName.Contains(inputDto.Filter) || x.LastName.Contains(inputDto.Filter));
-        return _mapper.Map<List<CustomerDto>>(entity);
+        var customers = await _customerManager.GetListAsync(inputDto.Filter);
+        return _mapper.Map<List<CustomerDto>>(customers);
     }
 }

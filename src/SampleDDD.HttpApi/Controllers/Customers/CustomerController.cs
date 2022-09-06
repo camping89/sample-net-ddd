@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SampleDDD.Application.Contracts.Customers;
 
 namespace SampleDDD.HttpApi.Controllers.Customers;
 
 [ApiController]
 [Route("[controller]")]
+//[Authorize]
 public class CustomerController : ControllerBase, ICustomerAppService
 {
     private readonly ICustomerAppService _customerAppService;
