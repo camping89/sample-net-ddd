@@ -7,6 +7,6 @@ public class DomainModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterType<CustomerManager>().As<CustomerManager>().InstancePerLifetimeScope();
+        builder.RegisterType<CustomerManager>();
     }
 }

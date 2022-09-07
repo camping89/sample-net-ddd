@@ -11,10 +11,10 @@ public class InfrastructureModule : Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.RegisterType<CustomerRepository>().As<ICustomerRepository>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerLifetimeScope();
+        builder.RegisterType<CustomerRepository>().As<ICustomerRepository>().InstancePerDependency();
+        builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerDependency();
         
         //Domain Module
-        builder.RegisterModule(new DomainModule());
+        //builder.RegisterModule(new DomainModule());
     }
 }

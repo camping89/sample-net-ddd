@@ -4,6 +4,7 @@ using SampleDDD.Application.Contracts.Customers;
 using SampleDDD.Application.Contracts.Products;
 using SampleDDD.Application.Customers;
 using SampleDDD.Application.Products;
+using SampleDDD.Domain;
 
 namespace SampleDDD.Application;
 
@@ -22,9 +23,10 @@ public class ApplicationModule : Module
         builder.Register(
                 c => c.Resolve<MapperConfiguration>().CreateMapper(c.Resolve))
             .As<IMapper>()
-            .InstancePerLifetimeScope();
+            .InstancePerDependency();
 
-        builder.RegisterType<CustomerAppService>().As<ICustomerAppService>().InstancePerLifetimeScope();
-        builder.RegisterType<ProductAppService>().As<IProductAppService>().InstancePerLifetimeScope();
+        builder.RegisterType<CustomerAppService>().As<ICustomerAppService>().InstancePerDependency();
+        builder.RegisterType<ProductAppService>().As<IProductAppService>().InstancePerDependency();
+        builder.RegisterModule(new DomainModule());
     }
 }
